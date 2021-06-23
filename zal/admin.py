@@ -5,8 +5,8 @@ from zal.models import Zal
 
 @admin.register(Zal)
 class ZalAdmin(admin.ModelAdmin):
-    fields = ['name', 'amount_mest']
-    list_display = ['name', 'amount_mest']
+    fields = ['name', 'size']
+    list_display = ['name', 'size']
 
 
 

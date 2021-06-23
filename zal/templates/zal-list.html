@@ -1,0 +1,6 @@
+{% extends 'static/base.html' %}
+{% block content %}
+    {% for zal in zals %}
+         {% include 'zal-detail.html' with zal=zal %}
+    {% endfor %}
+{% endblock %}

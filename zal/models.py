@@ -8,7 +8,7 @@ class Zal(models.Model):
                                )
 
     def __str__(self):
-        return  self.name
+        return self.name
 
 
 class Film(models.Model):
@@ -22,9 +22,20 @@ class Film(models.Model):
 
 
 class Seans(models.Model):
-    date_start = models.DateTimeField()
-    date_end = models.DateTimeField()
+    date_start = models.DateField(default=0)
+    date_end = models.DateField(default=0)
+    time_start = models.TimeField(default=0)
+    time_end = models.TimeField(default=0)
     film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
     zal = models.ForeignKey(Zal, on_delete=models.CASCADE)
-    ticket_amount = models.IntegerField(default=1)
-    price = models.DecimalField(max_digits=2, decimal_places=2, default=10)
+    price = models.IntegerField(default=10)
+
+
+
+
+
+
+class Ticket(models.Model):
+    seans = models.OneToOneField(Seans, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+

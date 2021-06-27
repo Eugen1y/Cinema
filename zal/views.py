@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import *
 
+from zal.forms import SeansForm
 from zal.models import Zal, Seans, Film
 
 
@@ -20,14 +21,13 @@ class ZalList(ListView):
 
 class SeansCreate(LoginRequiredMixin, CreateView):
     model = Seans
-    fields = ['date_start',
-              'date_end',
-              'film',
-              'zal',
-              'ticket_amount',
-              'price']
+    form_class = SeansForm
     template_name = 'seans-create.html'
-    success_url = '/seans/list'
+
+    def get_success_url(self):
+        return '/seans/list'
+
+
 
 
 class SeansList(ListView):

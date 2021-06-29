@@ -1,0 +1,13 @@
+{% extends 'static/base.html' %}
+
+{% block content %}
+    {% if request.user.is_staff %}
+<form method="post" action="{% url 'film-add' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить фильм </button>
+</form>
+        {% else %}
+        <div>This is not for you!</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'static/base.html' %}
+{% block content %}
+    {% for object in seans %}
+
+
+     <div>
+   Film:  {{ object.film }}
+    </div>
+        <div>
+    Dates: {{ object.date_start }} - {{ object.date_end }}
+    </div>
+            <div>
+    Time: {{ object.time_start }} - {{ object.time_end }}
+    </div>
+        <div>
+    Zal number: {{ object.zal }}
+    </div>
+    <div>
+   Price : $ {{ object.price }}
+    </div>
+
+
+    {% endfor %}
+{% endblock %}

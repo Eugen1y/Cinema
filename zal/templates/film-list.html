@@ -2,9 +2,9 @@
 {% block content %}
     {% for object in films %}
 
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+    <div>
+    {{ object.seans_set }}
+    </div>
      <div>
     {{ object.name }}
     </div>

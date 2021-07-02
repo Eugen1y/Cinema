@@ -1,0 +1,30 @@
+{% block content %}
+    <div>
+        Film: {{ object.film }}
+    </div>
+    <div>
+        Dates: {{ object.date_start }} - {{ object.date_end }}
+    </div>
+    <div>
+        Time: {{ object.time_start }} - {{ object.time_end }}
+    </div>
+    <div>
+        Zal number: {{ object.zal }}
+    </div>
+    {% if object.get_available_tickets == 0 %}
+        <div>
+            Available tickets : 0
+        </div>
+        {% else %}
+        Available ticket count : {{ object.get_available_tickets }}
+        <div>
+        Price : $ {{ object.price }}
+    </div>
+    {% endif %}
+
+    <a href="{% url "seans-update" pk=object.id %}" class="btn btn-primary">Update</a>
+    <a href="{% url "seans-detail" pk=object.id %}" class="btn btn-primary">Detail</a>
+    {% if object.get_available_tickets != 0 %}
+    <a href="{% url "ticket-create" %}" class="btn btn-primary">Buy</a>
+    {% endif %}
+{% endblock %}

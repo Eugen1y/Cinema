@@ -1,4 +1,5 @@
 from django.db import models
+from zal.services import get_available
 
 
 class Zal(models.Model):
@@ -30,12 +31,10 @@ class Seans(models.Model):
     zal = models.ForeignKey(Zal, on_delete=models.CASCADE)
     price = models.IntegerField(default=10)
 
+    def __str__(self):
+        return f'{self.film}{self.date_start} {self.time_start}'
 
+    def get_available_tickets(self):
+        return get_available(self)
 
-
-
-
-class Ticket(models.Model):
-    seans = models.OneToOneField(Seans, on_delete=models.DO_NOTHING)
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 

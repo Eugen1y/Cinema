@@ -1,0 +1,12 @@
+{% extends 'static/base.html' %}
+{% block content %}
+    {% if request.user.is_staff %}
+<form method="post" action="{% url 'seans-update' object.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+        {% else %}
+        <div>This is not for you!</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'static/base.html' %}
+{% block content %}
+    <div>
+        Seans : {{ ticket.seans }}
+    </div>
+    <div>
+        Ticket amount : {{ ticket.amount }}
+    </div>
+
+    <a href="{% url "ticket-detail" pk=ticket.id %}" class="btn btn-primary">Detail</a>
+
+{% endblock %}

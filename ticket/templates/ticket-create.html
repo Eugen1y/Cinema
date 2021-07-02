@@ -1,0 +1,13 @@
+{% extends 'static/base.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+<form method="post" action="{% url 'ticket-create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit">Купить билет</button>
+</form>
+
+{% endif %}
+{% endblock %}

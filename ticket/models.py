@@ -7,7 +7,7 @@ from zal.models import Seans
 class Ticket(models.Model):
     seans = models.ForeignKey(Seans, on_delete=models.CASCADE)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    amount = models.IntegerField(default=1)
+    amount = models.PositiveIntegerField(default=1)
 
     def get_absolute_url(self):
         """Return an absolute URLs for an instance"""

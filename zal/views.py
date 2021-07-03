@@ -34,12 +34,10 @@ class SeansDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'tickets'
 
 
-
 class SeansList(ListView):
     model = Seans
     template_name = 'seans-list.html'
     context_object_name = 'seans'
-
 
 
 class SeansUpdate(StaffRequiredMixin, UpdateView):

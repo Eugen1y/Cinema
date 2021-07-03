@@ -6,9 +6,9 @@ from zal.services import get_available_seanses
 
 
 class TicketCreateForm(forms.ModelForm):
-    amount = forms.DateTimeField
+    seans = forms.ModelChoiceField(
+        queryset=Seans.objects.filter(id__in=get_available_seanses(Seans.objects.all())))
 
     class Meta:
         model = Ticket
-        fields = ['amount','seans']
-        seans = get_available_seanses(queryset=Seans.objects.all())
+        fields = ['amount', 'seans']

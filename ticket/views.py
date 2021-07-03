@@ -14,7 +14,8 @@ class TicketCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         available_tickets = form.instance.seans.get_available_tickets()
         if available_tickets < form.cleaned_data['amount']:
-            raise ArithmeticError(f'Amount should be in range 1 - {available_tickets}')
+            raise ArithmeticError(
+                f'U select too much tickets.Available - {available_tickets}')
         form.instance.user = self.request.user
         return super(TicketCreate, self).form_valid(form)
 

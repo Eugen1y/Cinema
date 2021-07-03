@@ -1,5 +1,5 @@
 from django.db import models
-from zal.services import get_available
+from zal.services import get_available, get_available_seanses
 
 
 class Zal(models.Model):

@@ -39,7 +39,7 @@ class SeansForm(forms.ModelForm):
                 'zal': zal
                 }
 
-    def time_valid(self, *args, **kwargs):
+    def time_valid(self):
         seans = self.get_cleaned_data(seans_id=self.instance.id or None)
         date_start = seans['date_start']
         date_end = seans['date_end']

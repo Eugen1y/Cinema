@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('static.urls')),
     path('', include('user.urls')),
     path('', include('zal.urls')),
-    path('',include('ticket.urls')),
+    path('', include('ticket.urls')),
+    path('api/', include('api.urls', namespace='api')),
 ]

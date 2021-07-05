@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.core.exceptions import ValidationError
 
 
 def get_available(seans):
@@ -22,3 +23,25 @@ def get_available_seanses(queryset):
         seanses_id.append(seans.id)
         x += 1
     return seanses_id
+
+
+def datetime_validation(self):
+    seans = self.get_cleaned_data(seans_id=self.instance.id or None)
+    date_start = seans['date_start']
+    date_end = seans['date_end']
+    time_start = seans['time_start']
+    time_end = seans['time_end']
+    zal_objects = seans['zal_objects']
+    if zal_objects:
+        for obj in zal_objects:
+            if obj.date_start <= date_start <= obj.date_end or obj.date_end >= date_end >= obj.date_start:
+                if obj.time_start <= time_start <= obj.time_end:
+                    raise ValidationError(message='Invalid date or time')
+                elif time_start <= obj.time_start and time_end >= obj.time_end or time_end <= obj.time_end:
+                    raise ValidationError(message='Invalid date or time')
+            elif date_start <= obj.date_start and \
+                    (obj.date_end >= date_end >= obj.date_start or date_end >= obj.date_end):
+                if obj.time_start <= time_start <= obj.time_end:
+                    raise ValidationError(message='Invalid date or time')
+                elif time_start <= obj.time_start and time_end >= obj.time_end or time_end <= obj.time_end:
+                    raise ValidationError(message='Invalid date or time')

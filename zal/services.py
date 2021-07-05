@@ -25,13 +25,12 @@ def get_available_seanses(queryset):
     return seanses_id
 
 
-def datetime_validation(self):
-    seans = self.get_cleaned_data(seans_id=self.instance.id or None)
-    date_start = seans['date_start']
-    date_end = seans['date_end']
-    time_start = seans['time_start']
-    time_end = seans['time_end']
-    zal_objects = seans['zal_objects']
+def datetime_validation(data):
+    date_start = data['date_start']
+    date_end = data['date_end']
+    time_start = data['time_start']
+    time_end = data['time_end']
+    zal_objects = data['zal_objects']
     if zal_objects:
         for obj in zal_objects:
             if obj.date_start <= date_start <= obj.date_end or obj.date_end >= date_end >= obj.date_start:

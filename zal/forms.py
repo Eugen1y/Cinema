@@ -40,13 +40,7 @@ class SeansForm(forms.ModelForm):
                 }
 
     def save(self, commit=True):
-        seans = self.get_cleaned_data()
-        self.instance.date_start = seans['date_start']
-        self.instance.date_end = seans['date_end']
-        self.instance.time_start = seans['time_start']
-        self.instance.time_end = seans['time_end']
-        self.instance.zal = seans['zal']
-        datetime_validation(self)
+        datetime_validation(self.get_cleaned_data(seans_id=self.instance.id or None))
         super(SeansForm, self).save()
 
 

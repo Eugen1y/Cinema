@@ -1,5 +1,6 @@
 from rest_framework.generics import *
 
+from api.permisions import UserAPIPermission, UserListAPIPermission
 from api.serializers import SeansSerializer
 from zal.models import Seans
 
@@ -7,15 +8,11 @@ from zal.models import Seans
 class SeansListAPIView(ListCreateAPIView):
     serializer_class = SeansSerializer
     queryset = Seans.objects.all()
-
-    def post(self, request, *args, **kwargs):
-        ...
+    permission_classes = [UserListAPIPermission]
 
 
 class SeansRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Seans.objects.all()
     serializer_class = SeansSerializer
-
-
-class SeansCreateAPIView(CreateAPIView):
-    ...
+    lookup_field = 'id'
+    permission_classes = [UserListAPIPermission]

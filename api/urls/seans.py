@@ -6,6 +6,6 @@ from api.views.seans import SeansRetrieveUpdateAPIView, SeansListAPIView
 app_name = 'seans'
 
 urlpatterns = [
-    path('<int:pk>/', SeansRetrieveUpdateAPIView.as_view(), name='seans-detail'),
+    path('<int:id>/', SeansRetrieveUpdateAPIView.as_view(), name='seans-detail'),
     path('list/', SeansListAPIView.as_view(), name='seans-list')
 ]

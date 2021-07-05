@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from ticket.models import Ticket
@@ -23,6 +24,7 @@ class FilmSerializer(serializers.ModelSerializer):
 class SeansSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
+
     class Meta:
         model = Seans
         fields = '__all__'
@@ -33,4 +35,12 @@ class TicketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ticket
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = User
         fields = '__all__'

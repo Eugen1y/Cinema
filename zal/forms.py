@@ -22,25 +22,24 @@ class SeansForm(forms.ModelForm):
                   'zal',
                   'price']
 
-    def get_cleaned_data(self, seans_id=None):
+    def get_cleaned_data(self):
         super(SeansForm, self).clean()
         date_start = self.cleaned_data.get('date_start')
         date_end = self.cleaned_data.get('date_end')
         time_start = self.cleaned_data.get('time_start')
         time_end = self.cleaned_data.get('time_end')
         zal = self.cleaned_data.get('zal')
-        zal_objects = Seans.objects.filter(zal=zal).exclude(id=seans_id)
-
+        seans_id = self.instance.id
         return {'date_start': date_start,
                 'date_end': date_end,
                 'time_start': time_start,
                 'time_end': time_end,
-                'zal_objects': zal_objects,
-                'zal': zal
+                'zal': zal,
+                'id': seans_id
                 }
 
     def save(self, commit=True):
-        datetime_validation(self.get_cleaned_data(seans_id=self.instance.id or None))
+        datetime_validation(self.get_cleaned_data())
         super(SeansForm, self).save()
 
 

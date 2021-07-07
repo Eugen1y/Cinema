@@ -30,7 +30,10 @@ def datetime_validation(data):
     date_end = data['date_end']
     time_start = data['time_start']
     time_end = data['time_end']
-    zal_objects = data['zal_objects']
+    zal = data['zal']
+    model = apps.get_model('zal', 'Seans')
+    seans_id = data['id']
+    zal_objects = model.objects.filter(zal=zal).exclude(id=seans_id)
     if zal_objects:
         for obj in zal_objects:
             if obj.date_start <= date_start <= obj.date_end or obj.date_end >= date_end >= obj.date_start:

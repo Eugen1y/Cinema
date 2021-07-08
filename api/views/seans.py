@@ -17,6 +17,7 @@ class SeansRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     lookup_field = 'id'
     permission_classes = [UserListAPIPermission]
 
+
 class SeansGroupListAPIView(ListCreateAPIView):
     serializer_class = SeansGroupSerializer
     queryset = SeansGroup.objects.all()
@@ -28,4 +29,3 @@ class SeansGroupRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = SeansGroupSerializer
     lookup_field = 'id'
     permission_classes = [UserListAPIPermission]
-

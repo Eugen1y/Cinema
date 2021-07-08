@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from ticket.models import Ticket
 from zal.models import Zal, Film, SeansGroup, Seans
-from zal.services import datetime_validation
+from zal.services import datetime_validation, tickets_exist
 
 
 class ZalSerializer(serializers.ModelSerializer):
@@ -12,6 +12,8 @@ class ZalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Zal
         fields = '__all__'
+
+    validators = [tickets_exist]
 
 
 class FilmSerializer(serializers.ModelSerializer):
@@ -34,7 +36,7 @@ class SeansSerializer(serializers.ModelSerializer):
 
 
 class SeansGroupSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
+
     seanses = serializers.HyperlinkedRelatedField(many=True,
                                                   read_only=True,
                                                   view_name='seans-detail')
@@ -42,6 +44,8 @@ class SeansGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = SeansGroup
         fields = '__all__'
+
+    validators = [datetime_validation]
 
 
 class TicketSerializer(serializers.ModelSerializer):

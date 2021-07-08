@@ -34,7 +34,7 @@ def datetime_validation(data):
     time_end = data['time_end']
     zal = data['zal']
     model = apps.get_model('zal', 'Seans')
-    seans_id = data['id']
+    seans_id = data.get('id')
     zal_objects = model.objects.filter(zal=zal).exclude(id=seans_id)
     if zal_objects:
         for obj in zal_objects:
@@ -56,3 +56,13 @@ def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days) + 1):
         date_list.append(start_date + timedelta(n))
     return date_list
+
+
+def tickets_exist(data):
+    model = apps.get_model('zal', 'Seans')
+    name = data.get('name')
+    zal_seanses = model.objects.filter(zal__name=name)
+
+    for seans in zal_seanses:
+        if seans.zal.size != seans.get_available_tickets():
+            raise ValidationError('In this zal already buy tickets')

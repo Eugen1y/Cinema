@@ -1,6 +1,8 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from zal.models import SeansGroup, Zal, Film
-from zal.services import datetime_validation
+from zal.services import datetime_validation, tickets_exist
 
 
 class SeansForm(forms.ModelForm):
@@ -44,4 +46,32 @@ class SeansForm(forms.ModelForm):
 
 
 class SeansUpdateForm(SeansForm):
-    pass
+
+    def save(self, commit=True):
+        if self.instance.get_available_tickets() == self.instance.zal.size:
+            super(SeansUpdateForm, self).save()
+        else:
+            raise ValidationError('Seans already have tickets')
+
+
+class ZalUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Zal
+        fields = '__all__'
+
+    def get_cleaned_data(self):
+        super(ZalUpdateForm, self).clean()
+        name = self.cleaned_data.get('name')
+        size = self.cleaned_data.get('size')
+        return {
+            'name': name,
+            'size': size,
+        }
+
+    def save(self, commit=True):
+        try:
+            tickets_exist(self.get_cleaned_data())
+            super(ZalUpdateForm, self).save()
+        except ValidationError:
+            ...
+

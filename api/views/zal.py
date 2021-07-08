@@ -10,6 +10,7 @@ class ZalListAPIView(ListCreateAPIView):
     queryset = Zal.objects.all()
     permission_classes = [UserListAPIPermission]
 
+
 class ZalRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Zal.objects.all()
     serializer_class = ZalSerializer

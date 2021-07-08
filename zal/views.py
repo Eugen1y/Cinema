@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import *
 
-from zal.forms import SeansForm
+from zal.forms import SeansForm, SeansUpdateForm, ZalUpdateForm
 from zal.mixins import StaffRequiredMixin
 from zal.models import Zal, SeansGroup, Film, Seans
 
@@ -41,9 +41,9 @@ class SeansList(ListView):
 
 
 class SeansUpdate(StaffRequiredMixin, UpdateView):
-    model = SeansGroup
+    model = Seans
     template_name = 'seans-update.html'
-    form_class = SeansForm
+    form_class = SeansUpdateForm
 
     def get_success_url(self):
         return '/seans/list'
@@ -60,3 +60,18 @@ class FilmList(ListView):
     model = Film
     template_name = 'film-list.html'
     context_object_name = 'films'
+
+
+class ZalUpdate(StaffRequiredMixin, UpdateView):
+    model = Zal
+    template_name = 'zal-update.html'
+    form_class = ZalUpdateForm
+
+    def get_success_url(self):
+        return f'/zal/list'
+
+
+
+class ZalDetail(LoginRequiredMixin, DetailView):
+    model = Zal
+    template_name = 'zal-detail.html'

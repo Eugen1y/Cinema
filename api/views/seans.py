@@ -1,8 +1,8 @@
 from rest_framework.generics import *
 
-from api.permisions import UserAPIPermission, UserListAPIPermission
-from api.serializers import SeansSerializer
-from zal.models import Seans
+from api.permisions import UserListAPIPermission
+from api.serializers import SeansSerializer, SeansGroupSerializer
+from zal.models import SeansGroup, Seans
 
 
 class SeansListAPIView(ListCreateAPIView):
@@ -16,3 +16,16 @@ class SeansRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = SeansSerializer
     lookup_field = 'id'
     permission_classes = [UserListAPIPermission]
+
+class SeansGroupListAPIView(ListCreateAPIView):
+    serializer_class = SeansGroupSerializer
+    queryset = SeansGroup.objects.all()
+    permission_classes = [UserListAPIPermission]
+
+
+class SeansGroupRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = SeansGroup.objects.all()
+    serializer_class = SeansGroupSerializer
+    lookup_field = 'id'
+    permission_classes = [UserListAPIPermission]
+

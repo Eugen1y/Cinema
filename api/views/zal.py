@@ -1,6 +1,6 @@
 from rest_framework.generics import *
 
-from api.permisions import UserListAPIPermission, UserAPIPermission
+from api.permisions import UserListAPIPermission
 from api.serializers import ZalSerializer
 from zal.models import Zal
 

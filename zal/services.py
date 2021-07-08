@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.apps import apps
 from django.core.exceptions import ValidationError
 
@@ -47,3 +49,10 @@ def datetime_validation(data):
                     raise ValidationError(message='Invalid date or time')
                 elif time_start <= obj.time_start and time_end >= obj.time_end or time_end <= obj.time_end:
                     raise ValidationError(message='Invalid date or time')
+
+
+def daterange(start_date, end_date):
+    date_list = []
+    for n in range(int((end_date - start_date).days) + 1):
+        date_list.append(start_date + timedelta(n))
+    return date_list

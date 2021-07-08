@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from ticket.models import Ticket
-from zal.models import Zal, Film, Seans
+from zal.models import Zal, Film, SeansGroup, Seans
 from zal.services import datetime_validation
 
 
@@ -31,6 +31,17 @@ class SeansSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     validators = [datetime_validation]
+
+
+class SeansGroupSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    seanses = serializers.HyperlinkedRelatedField(many=True,
+                                                  read_only=True,
+                                                  view_name='seans-detail')
+
+    class Meta:
+        model = SeansGroup
+        fields = '__all__'
 
 
 class TicketSerializer(serializers.ModelSerializer):

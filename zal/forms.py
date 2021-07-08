@@ -1,5 +1,5 @@
 from django import forms
-from zal.models import Seans, Zal, Film
+from zal.models import SeansGroup, Zal, Film
 from zal.services import datetime_validation
 
 
@@ -13,7 +13,7 @@ class SeansForm(forms.ModelForm):
     price = forms.IntegerField()
 
     class Meta:
-        model = Seans
+        model = SeansGroup
         fields = ['date_start',
                   'date_end',
                   'time_start',

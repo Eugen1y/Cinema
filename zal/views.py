@@ -3,7 +3,7 @@ from django.views.generic import *
 
 from zal.forms import SeansForm
 from zal.mixins import StaffRequiredMixin
-from zal.models import Zal, Seans, Film
+from zal.models import Zal, SeansGroup, Film, Seans
 
 
 class ZalCreate(StaffRequiredMixin, CreateView):
@@ -20,7 +20,7 @@ class ZalList(ListView):
 
 
 class SeansCreate(StaffRequiredMixin, CreateView):
-    model = Seans
+    model = SeansGroup
     form_class = SeansForm
     template_name = 'seans-create.html'
 
@@ -41,7 +41,7 @@ class SeansList(ListView):
 
 
 class SeansUpdate(StaffRequiredMixin, UpdateView):
-    model = Seans
+    model = SeansGroup
     template_name = 'seans-update.html'
     form_class = SeansForm
 

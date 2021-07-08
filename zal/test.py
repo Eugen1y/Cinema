@@ -1,5 +1,14 @@
-import pandas as pd
-import datetime as dt
-# if (obj.date_start <= date_start <= obj.date_end and obj.time_start <= time_start <= obj.time_end) or (
-#         obj.date_end >= date_end >= obj.date_start and obj.time_end >= time_end >= obj.time_start):
-
+# from datetime import date, timedelta
+#
+#
+# def daterange(start_date, end_date):
+#     date_list = []
+#     for n in range(int((end_date - start_date).days) + 1):
+#         date_list.append(start_date + timedelta(n))
+#     return date_list
+#
+#
+#
+# start_date = date(2015, 1, 1)
+# end_date = date(2015, 1, 2)
+# print(daterange(start_date, end_date))

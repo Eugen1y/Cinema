@@ -22,7 +22,7 @@ class Film(models.Model):
         return self.name
 
 
-class Seans(models.Model):
+class SeansGroup(models.Model):
     date_start = models.DateField(default=0)
     date_end = models.DateField(default=0)
     time_start = models.TimeField(default=0)
@@ -31,6 +31,19 @@ class Seans(models.Model):
     zal = models.ForeignKey(Zal, on_delete=models.CASCADE)
     price = models.IntegerField(default=10)
 
+    def __str__(self):
+        return f'{self.film}{self.date_start} {self.time_start}'
+
+
+class Seans(models.Model):
+    seans_group = models.ForeignKey(SeansGroup,related_name='seanses', on_delete=models.CASCADE)
+    date_start = models.DateField(default=0)
+    date_end = models.DateField(default=0)
+    time_start = models.TimeField(default=0)
+    time_end = models.TimeField(default=0)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
+    zal = models.ForeignKey(Zal, on_delete=models.CASCADE)
+    price = models.IntegerField(default=10)
 
     def __str__(self):
         return f'{self.film}{self.date_start} {self.time_start}'

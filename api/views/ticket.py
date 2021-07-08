@@ -1,6 +1,6 @@
 from rest_framework.generics import *
 
-from api.permisions import UserAPIPermission, UserListAPIPermission
+from api.permisions import UserListAPIPermission
 from api.serializers import TicketSerializer
 from ticket.models import Ticket
 

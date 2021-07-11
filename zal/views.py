@@ -38,6 +38,7 @@ class SeansList(ListView):
     model = Seans
     template_name = 'seans-list.html'
     context_object_name = 'seans'
+    # paginate_by = 10
 
 
 class SeansUpdate(StaffRequiredMixin, UpdateView):
@@ -71,7 +72,27 @@ class ZalUpdate(StaffRequiredMixin, UpdateView):
         return f'/zal/list'
 
 
-
 class ZalDetail(LoginRequiredMixin, DetailView):
     model = Zal
     template_name = 'zal-detail.html'
+
+
+class DateTimeSearch(ListView):
+    template_name = 'seans-list.html'
+    context_object_name = 'seans'
+
+    def get_queryset(self):
+        if self.request.GET.get('date') and self.request.GET.get('time'):
+            return Seans.objects.filter(date_start=self.request.GET.get('date'),
+                                        time_start__gte=self.request.GET.get('time'))
+        if self.request.GET.get('date'):
+            return Seans.objects.filter(date_start=self.request.GET.get('date'))
+        else:
+            return Seans.objects.filter(
+                time_start__gte=self.request.GET.get('time'))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DateTimeSearch, self).get_context_data(*args, **kwargs)
+        context['date'] = self.request.GET.get('date')
+        context['time'] = self.request.GET.get('time')
+        return context

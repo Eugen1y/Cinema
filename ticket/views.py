@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 
 from django.views.generic import *
 
 from ticket.forms import TicketCreateForm
 from ticket.models import Ticket
+from ticket.services import available_tickets
 
 
 class TicketCreate(LoginRequiredMixin, CreateView):
@@ -12,10 +14,7 @@ class TicketCreate(LoginRequiredMixin, CreateView):
     form_class = TicketCreateForm
 
     def form_valid(self, form):
-        available_tickets = form.instance.seans.get_available_tickets()
-        if available_tickets < form.cleaned_data['amount']:
-            raise ArithmeticError(
-                f'U select too much tickets.Available - {available_tickets}')
+        available_tickets(form.get_cleaned_data())
         form.instance.user = self.request.user
         return super(TicketCreate, self).form_valid(form)
 

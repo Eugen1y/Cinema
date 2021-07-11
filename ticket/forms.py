@@ -12,3 +12,13 @@ class TicketCreateForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ['amount', 'seans']
+
+    def get_cleaned_data(self):
+        super(TicketCreateForm, self).clean()
+        amount = self.cleaned_data.get('amount')
+        seans = self.cleaned_data.get('seans')
+        return {
+            'amount': amount,
+            'seans': seans,
+        }
+

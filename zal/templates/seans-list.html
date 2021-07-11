@@ -1,8 +1,16 @@
 {% extends 'static/base.html' %}
 {% block content %}
     <div>
-    {% for object in seans %}
-{% include 'seans-detail.html' with object=object %}
-    {% endfor %}
+        <form action="{% url 'search' %}" method="get" class="d-flex editContent">
+            <input type="date" name="date" class="form-control-static">
+            <input type="time" name="time" class="form-control-static">
+            <button type="submit" class="btn1 btn">
+                <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+        </form>
+        {% for object in seans %}
+            {% include 'seans-detail.html' with object=object %}
+        {% endfor %}
     </div>
 {% endblock %}
+

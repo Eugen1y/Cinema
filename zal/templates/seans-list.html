@@ -2,11 +2,10 @@
 {% block content %}
     <div>
         <form action="{% url 'search' %}" method="get" class="d-flex editContent">
-            <input type="date" name="date" class="form-control-static">
-            <input type="time" name="time" class="form-control-static">
-            <button type="submit" class="btn1 btn">
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
+            <input type="date" name="date"  class="form-control-static">
+            <input type="time" name="time" value="00:00:00" class="form-control-static">
+            <input type="number" name="price"  class="form-control-static">
+            <button type="submit" class="btn btn-primary">Find</button>
         </form>
         {% for object in seans %}
             {% include 'seans-detail.html' with object=object %}

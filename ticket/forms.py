@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import forms
 
 from ticket.models import Ticket
@@ -7,7 +9,8 @@ from zal.services import get_available_seanses
 
 class TicketCreateForm(forms.ModelForm):
     seans = forms.ModelChoiceField(
-        queryset=Seans.objects.filter(id__in=get_available_seanses(Seans.objects.all())))
+        queryset=Seans.objects.filter(id__in=get_available_seanses(Seans.objects.all()),
+                                      date_start__gte=date.today()).order_by('date_start', 'time_start'))
 
     class Meta:
         model = Ticket
@@ -21,4 +24,3 @@ class TicketCreateForm(forms.ModelForm):
             'amount': amount,
             'seans': seans,
         }
-

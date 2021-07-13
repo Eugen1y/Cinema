@@ -3,7 +3,7 @@
 
         <div class="card-body">
             <h5 class="card-title">{{ object.film }}</h5>
-            <p class="card-text">Dates: {{ object.date_start }}</p>
+            <p class="card-text">Date: {{ object.date_start }}</p>
             <p class="card-text">Time: {{ object.time_start }} - {{ object.time_end }}</p>
             <p class="card-text">Zal number: {{ object.zal }}</p>
             {% if object.get_available_tickets <= 0 %}

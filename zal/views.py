@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import *
 
@@ -38,7 +40,10 @@ class SeansList(ListView):
     model = Seans
     template_name = 'seans-list.html'
     context_object_name = 'seans'
-    # paginate_by = 10
+
+    def get_queryset(self):
+        self.queryset = Seans.objects.filter(date_start__gte=date.today()).order_by('date_start')
+        return self.queryset
 
 
 class SeansUpdate(StaffRequiredMixin, UpdateView):
@@ -84,15 +89,25 @@ class DateTimeSearch(ListView):
     def get_queryset(self):
         if self.request.GET.get('date') and self.request.GET.get('time'):
             return Seans.objects.filter(date_start=self.request.GET.get('date'),
-                                        time_start__gte=self.request.GET.get('time'))
-        if self.request.GET.get('date'):
-            return Seans.objects.filter(date_start=self.request.GET.get('date'))
-        else:
-            return Seans.objects.filter(
-                time_start__gte=self.request.GET.get('time'))
+                                        time_start__gte=self.request.GET.get('time')).order_by('time_start')
+        elif self.request.GET.get('date'):
+            return Seans.objects.filter(date_start=self.request.GET.get('date')).order_by('time_start')
+        elif self.request.GET.get('price'):
+            return Seans.objects.filter(price__gte=self.request.GET.get('price')).order_by('price')
+        elif self.request.GET.get('time'):
+            return Seans.objects.filter(time_start__gte=self.request.GET.get('time')).order_by('time_start')
 
     def get_context_data(self, *args, **kwargs):
         context = super(DateTimeSearch, self).get_context_data(*args, **kwargs)
         context['date'] = self.request.GET.get('date')
         context['time'] = self.request.GET.get('time')
         return context
+
+
+class PriceSearch(ListView):
+    template_name = 'seans-list.html'
+    context_object_name = 'seans'
+
+    def get_queryset(self):
+        if self.request.GET.get('price'):
+            return Seans.objects.filter(price__gte=self.request.GET.get('price')).order_by('price')

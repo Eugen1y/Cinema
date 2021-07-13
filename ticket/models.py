@@ -20,3 +20,4 @@ class Ticket(models.Model):
 
     def get_total(self):
         return self.seans.price * self.amount
+

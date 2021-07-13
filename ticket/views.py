@@ -3,10 +3,9 @@ from django.views.generic import *
 from ticket.forms import TicketCreateForm
 from ticket.models import Ticket
 from ticket.services import available_tickets
-from zal.mixins import StaffRequiredMixin
 
 
-class TicketCreate(StaffRequiredMixin, CreateView):
+class TicketCreate(LoginRequiredMixin, CreateView):
     model = Ticket
     template_name = 'ticket-create.html'
     form_class = TicketCreateForm
@@ -26,6 +25,11 @@ class TicketList(LoginRequiredMixin, ListView):
         queryset = super(TicketList, self).get_queryset()
         return queryset.filter(user=self.request.user)
 
+    def total_spend_money(self, queryset):
+        money = 0
+        for ticket in queryset:
+            money += ticket.get_total()
+        return money
 
 class TicketDetail(LoginRequiredMixin, DetailView):
     model = Ticket

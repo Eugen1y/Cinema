@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.base import View, TemplateView
 
+from ticket.models import Ticket
 from user.forms import UserSignUpForm
 
 

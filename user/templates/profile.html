@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% include 'static/base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div>Username: {{ user.username }}</div>
+    <div></div>
+    <div></div>    
+{% endblock %}

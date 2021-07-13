@@ -1,13 +1,15 @@
 {% extends 'static/base.html' %}
 {% block content %}
-{% for ticket in ticket_list %}
-    <div>
-        Seans : {{ ticket.seans }}
-    </div>
-    <div>
-        Ticket amount : {{ ticket.amount }}
-    </div>
-
-    <a href="{% url "ticket-detail" pk=ticket.id %}" class="btn btn-primary">Detail</a>
+    {% for ticket in ticket_list %}
+        <div>
+            Seans : {{ ticket.seans }}
+        </div>
+        <div>
+            Ticket amount : {{ ticket.amount }}
+        </div>
+        <div>
+            Total: $ {{ ticket.get_total }}
+        </div>
+        <a href="{% url "ticket-detail" pk=ticket.id %}" class="btn btn-primary">Detail</a>
     {% endfor %}
 {% endblock %}

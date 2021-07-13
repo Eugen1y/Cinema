@@ -54,7 +54,9 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = '__all__'
+
     validators = [available_tickets]
+
 
 class UserSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)

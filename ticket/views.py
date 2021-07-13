@@ -1,14 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ValidationError
-
 from django.views.generic import *
-
 from ticket.forms import TicketCreateForm
 from ticket.models import Ticket
 from ticket.services import available_tickets
+from zal.mixins import StaffRequiredMixin
 
 
-class TicketCreate(LoginRequiredMixin, CreateView):
+class TicketCreate(StaffRequiredMixin, CreateView):
     model = Ticket
     template_name = 'ticket-create.html'
     form_class = TicketCreateForm
@@ -26,7 +24,6 @@ class TicketList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super(TicketList, self).get_queryset()
-
         return queryset.filter(user=self.request.user)
 
 

@@ -10,6 +10,7 @@ class FilmListAPIView(ListCreateAPIView):
     queryset = Film.objects.all()
     permission_classes = [UserListAPIPermission]
 
+
 class FilmRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer

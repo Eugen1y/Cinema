@@ -11,28 +11,27 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'about' %}">О нас</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'contacts' %}" tabindex="-1" aria-disabled="true">Контакты</a>
+                    <a class="nav-link active" href="{% url 'contacts' %}" tabindex="-1"
+                       aria-disabled="true">Контакты</a>
                 </li>
             </ul>
-              {% if request.user.is_authenticated %}
-
-{#                {% if request.user.is_staff %}#}
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_staff %}
                     <a href="{% url 'admin:index' %}" class="btn">Admin</a>
                     <a href="{% url 'zal-create' %}" class="btn">zal create</a>
-                  <a href="{% url 'zal-list' %}" class="btn">zal list</a>
                     <a href="{% url 'seans-create' %}" class="btn">seans create</a>
-                    <a href="{% url 'seans-list' %}" class="btn">seans list</a>
                     <a href="{% url 'film-add' %}" class="btn">film add</a>
-                    <a href="{% url 'film-list' %}" class="btn">film list</a>
-                    <a href="{% url 'ticket-create' %}" class="btn">Ticket create</a>
-                    <a href="{% url 'ticket-list' %}" class="btn">ticket list</a>
+                    <a href="{% url 'zal-list' %}" class="btn">zal list</a>
                 {% endif %}
-                <a href="{% url 'profile' %}" class="btn">{{ request.user.username }}</a>
-                <a href="{% url 'logout' %}" class="btn">Exit</a>
-{#            {% else %}#}
-                <a href="{% url 'login' %}" class="btn">Login</a>
-                <a href="{% url 'register' %}" class="btn">Register</a>
-{#            {% endif %}#}
+                <a href="{% url 'ticket-create' %}" class="btn">Ticket create</a>
+                <a href="{% url 'ticket-list' %}" class="btn">ticket list</a>
+            {% endif %}
+            <a href="{% url 'seans-list' %}" class="btn">seans list</a>
+            <a href="{% url 'film-list' %}" class="btn">film list</a>
+            <a href="{% url 'profile' %}" class="btn">{{ request.user.username }}</a>
+            <a href="{% url 'logout' %}" class="btn">Exit</a>
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <a href="{% url 'register' %}" class="btn">Register</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">

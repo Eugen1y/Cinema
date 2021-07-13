@@ -7,7 +7,6 @@ from zal.services import daterange
 
 @receiver(post_save, sender=SeansGroup)
 def handle_user_post_save_signal(sender, instance, created, *args, **kwargs):
-    """Handle a user model post_save signal"""
 
     if created:
         seans_list = daterange(instance.date_start, instance.date_end)

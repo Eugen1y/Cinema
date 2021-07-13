@@ -1,18 +1,11 @@
 {% extends 'static/base.html' %}
 {% block content %}
     {% for object in films %}
-
-    <div>
-    {{ object.seans_set }}
-    </div>
      <div>
     {{ object.name }}
     </div>
-
     <div>
     {{ object.description }}
     </div>
-
-
     {% endfor %}
 {% endblock %}

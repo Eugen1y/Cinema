@@ -11,6 +11,9 @@ class Zal(models.Model):
     def __str__(self):
         return self.name
 
+    def __repr__(self):
+
+        return f"<Zal {self}>"
 
 class Film(models.Model):
     name = models.CharField(max_length=128)

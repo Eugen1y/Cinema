@@ -17,3 +17,6 @@ class Ticket(models.Model):
 
     def __repr__(self):
         return f"<{self.__class__.__name__} pk={self.pk} ('{self}')>"
+
+    def get_total(self):
+        return self.seans.price * self.amount

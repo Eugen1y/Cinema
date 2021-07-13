@@ -6,6 +6,15 @@
     <div>
         Ticket amount : {{ ticket.amount }}
     </div>
+    <div>
+        Ticket price : $ {{ ticket.seans.price }}
+    </div>
+    <div>
+        Zal: {{ ticket.seans.zal }}
+    </div>
+    <div>
+        Total: ${{ ticket.get_total }}
+    </div>
 
     <a href="{% url "ticket-detail" pk=ticket.id %}" class="btn btn-primary">Detail</a>
 

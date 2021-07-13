@@ -7,5 +7,3 @@ def available_tickets(data):
     if available_tickets < data['amount']:
         raise ValidationError(
             f'U select too much tickets.Available - {available_tickets}')
-
-
